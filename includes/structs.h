@@ -1,7 +1,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-
 typedef struct s_img
 {
 	void	*img_ptr;
@@ -11,14 +10,14 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct		s_color
+typedef struct s_color
 {
 	int				r;
 	int				b;
 	int				g;
 }					t_color;
 
-typedef struct		s_coord
+typedef struct s_coord
 {
 	double			xcrd;
 	double			ycrd;
@@ -28,8 +27,8 @@ typedef struct		s_coord
 
 typedef struct s_fdf
 {
-	int		width; //elem in str
-	int		height; //cnt str
+	int		width;
+	int		height;
 	double	**matrix;
 	char	***f_info;
 	void	*mlx_ptr;
@@ -54,15 +53,12 @@ typedef struct s_fdf
 	double	alfa;
 	double	betta;
 	double	gamma;
-
 	double	count;
 	int		pnts_amount;
 
-	
 	t_coord	**crd;
 	t_img	img;
 	t_color	clr;
 }				t_fdf;
-
 
 #endif

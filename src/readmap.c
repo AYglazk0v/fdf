@@ -1,20 +1,19 @@
 #include "../includes/fdf.h"
 
-static void	ft_find_size(int fd, char* line,t_fdf *fdf)
+static void	ft_find_size(int fd, t_fdf *fdf)
 {
-	char	**xy_map;
 	char	*line;
 
-	fdf->height = 0;
 	line = get_next_line(fd);
-	if(!line)
+	if (!line)
 		ft_errors("Am I some kind of joke to you? The file is empty.\n");
+	fdf->height = 1;
 	fdf->width = ft_count_words(line, ' ');
-	while(1)
+	while (1)
 	{
 		line = get_next_line(fd);
-		if(!line)
-			break;
+		if (!line)
+			break ;
 		fdf->height++;
 		free(line);
 	}
@@ -24,18 +23,18 @@ static void	ft_find_size(int fd, char* line,t_fdf *fdf)
 static void	ft_alloc_matix(t_fdf *fdf, int j)
 {
 	fdf->f_info = (char ***)malloc(sizeof(char **) * fdf->height + 1);
-	if(!fdf->f_info)
+	if (!fdf->f_info)
 		ft_errors("Malloc errors\n");
 	fdf->matrix = (double **) malloc((sizeof(double *) * fdf->height));
-	if(!fdf->matrix)
+	if (!fdf->matrix)
 	{
 		free(fdf->f_info);
 		ft_errors("Malloc errors\n");
 	}
-	while(++j < fdf->height)
+	while (++j < fdf->height)
 	{
-		fdf->f_info[j] = (char **) malloc(sizeof (char *) * fdf->width + 1);
-		if(fdf->f_info)
+		fdf->f_info[j] = (char **) malloc(sizeof (char *) * fdf->width);
+		if (!fdf->f_info)
 		{
 			ft_clear_finfo(fdf, -1, 0);
 			ft_errors("error malloc\n");
@@ -50,17 +49,18 @@ static void	ft_alloc_matix(t_fdf *fdf, int j)
 	}
 }
 
-static void	fill_matrix(t_fdf *fdf, int fd, char *line, int j, int i)
+static void	fill_matrix(t_fdf *fdf, int fd, char *line, int j)
 {
+	int		i;
 	char	**map;
 	char	*tmp;
 
-	while(++j < fdf->height)
+	while (++j < fdf->height)
 	{
 		i = 0;
 		line = get_next_line(fd);
 		map = ft_split(line, ' ');
-		while(map[i++])
+		while (map[i])
 		{
 			tmp = ft_strchr(map[i], ',');
 			if (tmp)
@@ -68,6 +68,7 @@ static void	fill_matrix(t_fdf *fdf, int fd, char *line, int j, int i)
 			else
 				fdf->f_info[j][i] = tmp;
 			fdf->matrix[j][i] = ft_atoi(map[i]);
+			i++;
 		}
 		free(line);
 		if (map)
@@ -80,7 +81,7 @@ void	ft_read_map(t_fdf *fdf, int fd, char *map)
 	char	*line;
 
 	line = NULL;
-	ft_find_size(fd, line, fdf);
+	ft_find_size(fd, fdf);
 	ft_alloc_matix(fdf, -1);
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
@@ -89,5 +90,5 @@ void	ft_read_map(t_fdf *fdf, int fd, char *map)
 		ft_clear_matrix(fdf, -1);
 		ft_errors("Card reading error, check the arguments.\n");
 	}
-	fill_matrix(fdf, fd, line, -1, 0);
+	fill_matrix(fdf, fd, line, -1);
 }

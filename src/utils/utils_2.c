@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 	return (sign * (int)num);
 }
 
-int		ft_16to10(char *str, int p)
+int	ft_16to10(char *str, int p)
 {
 	int		i;
 	int		res;

@@ -23,7 +23,7 @@ static char	**ft_clear(char **tab)
 	return ((void *)0);
 }
 
-static char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char			*sub;
 	unsigned int	i;
@@ -81,7 +81,7 @@ size_t	ft_count_words(const char *str, char sep)
 /*
 	The function takes a string and splits it into substrings by separator.
 */
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	size_t	i;
 	size_t	start;
@@ -106,6 +106,6 @@ char	**ft_split(char const *s, char c)
 		while (s[start] == c)
 			start++;
 	}
-	dict[i] = ((void *)0);
+	dict[i] = NULL;
 	return (dict);
 }

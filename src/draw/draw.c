@@ -2,7 +2,7 @@
 
 static void	ft_get_pix_clr(t_fdf *fdf, int j, int i)
 {
-	t_color *clr;
+	t_color	*clr;
 
 	clr = (t_color *)malloc(sizeof(t_color));
 	fdf->crd[j][i].clr = clr;
@@ -30,10 +30,10 @@ static void	ft_take_pix_clr(t_fdf *fdf, int j, int i)
 
 void	ft_pix_map(t_fdf *fdf, int j, int i)
 {
-	while(++j < fdf->height)
+	while (++j < fdf->height)
 	{
-		i = 0;
-		while(i++ < fdf->width)
+		i = -1;
+		while (++i < fdf->width)
 		{
 			if (fdf->f_info[j][i] == NULL)
 				ft_take_pix_clr(fdf, j, i);
@@ -45,40 +45,42 @@ void	ft_pix_map(t_fdf *fdf, int j, int i)
 
 static void	ft_draw_menu(t_fdf *fdf)
 {
-	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr,
-	fdf->img.img_ptr, 0, 0);
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 10, 0x47F8DF,
-	"w/s -- X rot");
+		"w/s -- X rot");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 25, 0x47F8DF,
-	"q/e -- Y rot");
+		"q/e -- Y rot");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 40, 0x47F8DF,
-	"a/d -- Z rot");
+		"a/d -- Z rot");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 150, 10, 0x47F8DF,
-	"i -- ISO");
+		"i -- ISO");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 150, 25, 0x47F8DF,
-	"p -- perspective");
+		"p -- perspective");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 340, 10, 0x47F8DF,
-	"arrows -- move proj");
+		"arrows -- move proj");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 340, 25, 0x47F8DF,
-	"+/- -- zoom");
+		"+/- -- zoom");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 510, 10, 0x47F8DF,
-	"z -- increase the effect of height");
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 510, 25, 0x47F8DF, 
-	"x -- reduce the effect of height");
+		"z -- increase the effect of height");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 510, 25, 0x47F8DF,
+		"x -- reduce the effect of height");
 }
 
 void	ft_draw(t_fdf *fdf, int j, int i)
 {
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	ft_bzero((void *)fdf->img.addr, fdf->hei * fdf->wid * 4);
-	while(++j < fdf->height)
+	while (j < fdf->height)
 	{
 		i = 0;
-		while (i++ < fdf->width)
+		while (i < fdf->width)
 		{
 			ft_draw_horiz(fdf, j, i);
 			ft_draw_vert(fdf, j, i);
+			i++;
 		}
+		j++;
 	}
+	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr,
+		fdf->img.img_ptr, 0, 0);
 	ft_draw_menu(fdf);
 }

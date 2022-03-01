@@ -6,9 +6,12 @@
 # include <math.h>
 # include <stdlib.h>
 
+# include <stdio.h>
+
 # include "../minilibx-linux/mlx.h"
 # include "structs.h"
 # include "utils.h"
+# include "get_next_line.h"
 
 //DEFINES in order to be able to port other keys to another OS
 
@@ -31,7 +34,6 @@
 # define B_X 120
 # define B_SPACE 32
 # define B_TAB 65289
-# define B_CTR 65507
 
 # define HEIGHT 1000
 # define WIDTH 1000

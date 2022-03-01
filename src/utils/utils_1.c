@@ -6,17 +6,17 @@ void	ft_errors(char *s)
 	exit (1);
 }
 
-size_t ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(char *str)
 {
 	char	*cpy;
 	int		i;
@@ -39,10 +39,10 @@ char	*ft_strdup(const char *str)
 
 void	ft_clear_finfo(t_fdf *fdf, int j, int i)
 {
-	while(++j < fdf->height)
+	while (++j < fdf->height)
 	{
 		i = 0;
-		while(i++ < fdf->width)
+		while (i++ < fdf->width)
 		{
 			free(fdf->f_info[j][i]);
 			fdf->f_info[j][i] = NULL;
@@ -60,4 +60,3 @@ void	ft_clear_matrix(t_fdf *fdf, int i)
 		free(fdf->matrix[i]);
 	free(fdf->matrix);
 }
-

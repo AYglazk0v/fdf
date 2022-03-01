@@ -23,19 +23,19 @@ void	ft_wasdqe(t_fdf *fdf, int key)
 	else if (key == B_AR_R)
 		fdf->def_x += 10;
 	else if (key == B_P)
-		fdf->projection = "P";
+		fdf->projection = 'P';
 	else if (key == B_I)
-		fdf->projection = "I";
+		fdf->projection = 'I';
 }
 
 void	ft_zx(t_fdf *fdf, int key, int j, int i)
 {
 	if (key == B_Z)
 	{
-		while (j++ < fdf->height)
+		while (++j < fdf->height)
 		{
-			i = 0;
-			while (i ++ < fdf->width)
+			i = -1;
+			while (++i < fdf->width)
 				fdf->matrix[j][i] /= 1.1;
 		}
 		fdf->maxh /= 1.1;
@@ -45,8 +45,8 @@ void	ft_zx(t_fdf *fdf, int key, int j, int i)
 	{
 		while (++j < fdf->height)
 		{
-			i = 0;
-			while (i++ < fdf->width)
+			i = -1;
+			while (++i < fdf->width)
 				fdf->matrix[j][i] *= 1.1;
 		}
 		fdf->maxh *= 1.1;
@@ -71,13 +71,10 @@ int	ft_key_press(int key, t_fdf *fdf)
 		fdf->clr.r = (fdf->clr.r + 20) % 255;
 	else if (key == B_TAB)
 		fdf->clr.b = (fdf->clr.b + 20) % 255;
-	else if (key == B_CTR)
-		fdf->clr.g = (fdf->clr.g + 20) % 255;
 	ft_pix_map(fdf, -1, 0);
 	ft_rotate(fdf, -1, 0);
-	ft_draw(fdf, -1, 0);
+	ft_draw(fdf, 0, 0);
 	return (0);
-	
 }
 
 int	main(int argc, char **argv)
@@ -93,7 +90,8 @@ int	main(int argc, char **argv)
 		ft_read_map(&fdf, fd, argv[1]);
 		ft_init_fdf(&fdf);
 		ft_pix_map(&fdf, -1, 0);
-		mlx_hook(fdf.win_ptr, 2, (1L<< 0), ft_key_press, &fdf);
+		ft_draw(&fdf, 0, 0);
+		mlx_hook(fdf.win_ptr, 2, (1L << 0), ft_key_press, &fdf);
 		mlx_hook(fdf.win_ptr, 4, (1L << 2), ft_mouse_press, &fdf);
 		mlx_hook(fdf.win_ptr, 5, (1L << 3), ft_mouse_release, &fdf);
 		mlx_hook(fdf.win_ptr, 6, (1L << 6), ft_mouse_motion, &fdf);

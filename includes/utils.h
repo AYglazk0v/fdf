@@ -7,7 +7,7 @@
 
 void	ft_errors(char *s);
 size_t	ft_strlen(char *s);
-char	*ft_strdup(const char *str);
+char	*ft_strdup(char *str);
 void	ft_clear_finfo(t_fdf *fdf, int j, int i);
 void	ft_clear_matrix(t_fdf *fdf, int i);
 
@@ -22,6 +22,6 @@ void	ft_bzero(void *s, size_t n);
 //ft_split.c
 
 size_t	ft_count_words(const char *str, char sep);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *s, char c);
 
 #endif
