@@ -44,6 +44,7 @@ static void	ft_init_pix(t_fdf *fdf, int j, int i)
 				fdf->maxh = fdf->matrix[j][i];
 			if (fdf->matrix[j][i] < fdf->minh)
 				fdf->minh = fdf->matrix[j][i];
+			crd[j][i].clr_key = 0;
 		}
 	}
 	fdf->crd = crd;

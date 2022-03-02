@@ -22,6 +22,7 @@ typedef struct s_coord
 	double			xcrd;
 	double			ycrd;
 	double			zcrd;
+	int				clr_key;
 	t_color			*clr;
 }					t_coord;
 
