@@ -6,7 +6,7 @@
 /*   By: gtaggana <gtaggana@student.21-school       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:23:58 by gtaggana          #+#    #+#             */
-/*   Updated: 2022/03/03 22:34:17 by ayglazko         ###   ########.fr       */
+/*   Updated: 2022/03/03 23:10:17 by gtaggna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,30 @@ void	ft_zx(t_fdf *fdf, int key, int j, int i)
 	}
 }
 
+static void	ft_end_prog(int argc, t_fdf *fdf)
+{
+	if (argc == 2)
+	{
+		mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+		mlx_destroy_image(fdf->mlx_ptr, fdf->img.img_ptr);
+		mlx_destroy_display(fdf->mlx_ptr);
+		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
+		free(fdf->img.addr);
+		free(fdf->img.img_ptr);
+		ft_clear_finfo(fdf, -1, -1);
+		ft_clear_matrix(fdf, -1);
+		ft_clean_clr(fdf, -1, -1);
+		ft_clean_coord(fdf, -1);
+		exit(0);
+	}
+	else
+		ft_errors("invalid cnt argv\n");
+}
+
 int	ft_key_press(int key, t_fdf *fdf)
 {
 	if (key == B_ESC)
-		exit(0);
+		ft_end_prog(2, fdf);
 	ft_wasdqe(fdf, key);
 	ft_zx(fdf, key, -1, 0);
 	if (key == B_PLUS)
@@ -87,19 +107,6 @@ int	ft_key_press(int key, t_fdf *fdf)
 	ft_rotate(fdf, -1, 0);
 	ft_draw(fdf, 0, 0);
 	return (0);
-}
-
-static void	ft_end_prog(int argc, t_fdf *fdf)
-{
-	if (argc == 2)
-	{
-		ft_clear_finfo(fdf, -1, -1);
-		ft_clear_matrix(fdf, -1);
-		ft_clean_clr(fdf, -1, -1);
-		ft_clean_coord(fdf, -1);
-	}
-	else
-		ft_errors("invalid cnt argv\n");
 }
 
 int	main(int argc, char **argv)

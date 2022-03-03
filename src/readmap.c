@@ -103,4 +103,5 @@ void	ft_read_map(t_fdf *fdf, int fd, char *map)
 		ft_errors("Card reading error, check the arguments.\n");
 	}
 	fill_matrix(fdf, fd, line, -1);
+	close(fd);
 }
