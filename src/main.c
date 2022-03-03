@@ -72,10 +72,10 @@ static void	ft_end_prog(int argc, t_fdf *fdf)
 	{
 		mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 		mlx_destroy_image(fdf->mlx_ptr, fdf->img.img_ptr);
-		mlx_destroy_display(fdf->mlx_ptr);
 		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
-		free(fdf->img.addr);
-		free(fdf->img.img_ptr);
+		mlx_destroy_display(fdf->mlx_ptr);
+		mlx_loop_end(fdf->mlx_ptr);
+		free(fdf->mlx_ptr);
 		ft_clear_finfo(fdf, -1, -1);
 		ft_clear_matrix(fdf, -1);
 		ft_clean_clr(fdf, -1, -1);
