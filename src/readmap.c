@@ -21,6 +21,7 @@ static void	ft_find_size(int fd, t_fdf *fdf)
 		ft_errors("Am I some kind of joke to you? The file is empty.\n");
 	fdf->height = 1;
 	fdf->width = ft_count_words(line, ' ');
+	free(line);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -34,7 +35,7 @@ static void	ft_find_size(int fd, t_fdf *fdf)
 
 static void	ft_alloc_matix(t_fdf *fdf, int j)
 {
-	fdf->f_info = (char ***)malloc(sizeof(char **) * fdf->height + 1);
+	fdf->f_info = (char ***)malloc(sizeof(char **) * fdf->height);
 	if (!fdf->f_info)
 		ft_errors("Malloc errors\n");
 	fdf->matrix = (double **) malloc((sizeof(double *) * fdf->height));
@@ -83,8 +84,7 @@ static void	fill_matrix(t_fdf *fdf, int fd, char *line, int j)
 			i++;
 		}
 		free(line);
-		if (map)
-			ft_free_map(map, -1);
+		ft_free_map(map, -1);
 	}
 }
 

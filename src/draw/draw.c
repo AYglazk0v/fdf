@@ -16,13 +16,14 @@ static void	ft_get_pix_clr(t_fdf *fdf, int j, int i)
 {
 	t_color	*clr;
 
-	if (fdf->crd[j][i].clr)
+	if (fdf->crd[j][i].clr_key == 1)
 		free(fdf->crd[j][i].clr);
 	clr = (t_color *)malloc(sizeof(t_color));
 	fdf->crd[j][i].clr = clr;
 	fdf->crd[j][i].clr->r = ft_16to10(fdf->f_info[j][i], 0);
 	fdf->crd[j][i].clr->g = ft_16to10(fdf->f_info[j][i], 2);
 	fdf->crd[j][i].clr->b = ft_16to10(fdf->f_info[j][i], 4);
+	fdf->crd[j][i].clr_key = 1;
 }
 
 static void	ft_take_pix_clr(t_fdf *fdf, int j, int i)

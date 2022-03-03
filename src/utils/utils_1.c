@@ -53,8 +53,8 @@ void	ft_clear_finfo(t_fdf *fdf, int j, int i)
 {
 	while (++j < fdf->height)
 	{
-		i = 0;
-		while (i++ < fdf->width)
+		i = -1;
+		while (++i < fdf->width)
 		{
 			free(fdf->f_info[j][i]);
 			fdf->f_info[j][i] = NULL;

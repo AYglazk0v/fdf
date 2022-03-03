@@ -6,7 +6,7 @@
 /*   By: gtaggana <gtaggana@student.21-school       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:22:51 by gtaggana          #+#    #+#             */
-/*   Updated: 2022/03/03 21:22:52 by ayglazko         ###   ########.fr       */
+/*   Updated: 2022/03/03 22:27:58 by gtaggna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ void	ft_bzero(void *s, size_t n);
 
 size_t	ft_count_words(const char *str, char sep);
 char	**ft_split(char *s, char c);
+
+void	ft_clean_coord(t_fdf *fdf, int j);
+void	ft_clean_clr(t_fdf *fdf, int j, int i);
 
 #endif

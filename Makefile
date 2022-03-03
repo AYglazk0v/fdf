@@ -30,7 +30,8 @@ SRC	=	init.c \
 
 UTILS	=	ft_split.c \
 			utils_1.c \
-			utils_2.c
+			utils_2.c \
+			utils_3.c
 
 DRAW	=	draw_1.c \
 			draw_2.c \

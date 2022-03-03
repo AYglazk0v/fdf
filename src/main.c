@@ -6,7 +6,7 @@
 /*   By: gtaggana <gtaggana@student.21-school       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:23:58 by gtaggana          #+#    #+#             */
-/*   Updated: 2022/03/03 21:23:59 by ayglazko         ###   ########.fr       */
+/*   Updated: 2022/03/03 22:34:17 by ayglazko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,19 @@ int	ft_key_press(int key, t_fdf *fdf)
 	return (0);
 }
 
+static void	ft_end_prog(int argc, t_fdf *fdf)
+{
+	if (argc == 2)
+	{
+		ft_clear_finfo(fdf, -1, -1);
+		ft_clear_matrix(fdf, -1);
+		ft_clean_clr(fdf, -1, -1);
+		ft_clean_coord(fdf, -1);
+	}
+	else
+		ft_errors("invalid cnt argv\n");
+}
+
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -108,8 +121,8 @@ int	main(int argc, char **argv)
 		mlx_hook(fdf.win_ptr, 5, (1L << 3), ft_mouse_release, &fdf);
 		mlx_hook(fdf.win_ptr, 6, (1L << 6), ft_mouse_motion, &fdf);
 		mlx_loop(fdf.mlx_ptr);
+		close(fd);
 	}
-	else
-		ft_errors("Error, incorrect number of parameters.\n");
+	ft_end_prog(argc, &fdf);
 	return (0);
 }
